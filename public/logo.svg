@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 70" fill="none">
+  <defs>
+    <linearGradient id="logo-mark-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="60%" stop-color="#C5CBD3" />
+      <stop offset="100%" stop-color="#7B828E" />
+    </linearGradient>
+    <linearGradient id="logo-mark-core" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="100%" stop-color="#555C6A" />
+    </linearGradient>
+  </defs>
+
+  <!-- AERION Monogram Mark (Left) -->
+  <g transform="translate(10, 5) scale(0.6)">
+    <!-- Left/Right Outer Apex -->
+    <path d="M50 14 L18 84 L30 84 L50 36 L70 84 L82 84 Z" fill="url(#logo-mark-grad)" />
+    <!-- Center Dark Cut -->
+    <path d="M50 42 L34 80 L66 80 Z" fill="#050505" />
+    <!-- Floating Kinetic Delta -->
+    <path d="M50 46 L40 70 L60 70 Z" fill="url(#logo-mark-core)" />
+    <path d="M32 64 L68 64 L65 67 L35 67 Z" fill="#FFFFFF" opacity="0.6" />
+  </g>
+
+  <!-- AERION Bespoke Vector Wordmark (Right) -->
+  <g fill="#FFFFFF" transform="translate(80, 42)">
+    <!-- Letter A -->
+    <path d="M0 0 L14 -30 L22 -30 L36 0 L27 0 L23.5 -8 L12.5 -8 L9 0 Z M15.5 -15 L20.5 -15 L18 -22 Z" />
+    
+    <!-- Letter E -->
+    <path d="M48 0 L48 -30 L72 -30 L72 -24 L56 -24 L56 -18 L69 -18 L69 -12 L56 -12 L56 -6 L73 -6 L73 0 Z" />
+    
+    <!-- Letter R -->
+    <path d="M85 0 L85 -30 L104 -30 C112 -30 116 -26 116 -19 C116 -14 113 -10 107 -9 L117 0 L107 0 L98.5 -8 L93 -8 L93 0 Z M93 -14 L103 -14 C107 -14 109 -16 109 -19 C109 -22 107 -24 103 -24 L93 -24 Z" />
+    
+    <!-- Letter I -->
+    <path d="M129 0 L129 -30 L137 -30 L137 0 Z" />
+    
+    <!-- Letter O -->
+    <path d="M168 1 C157 1 149 -6 149 -15 C149 -24 157 -31 168 -31 C179 -31 187 -24 187 -15 C187 -6 179 1 168 1 Z M168 -6 C174 -6 179 -10 179 -15 C179 -20 174 -24 168 -24 C162 -24 157 -20 157 -15 C157 -10 162 -6 168 -6 Z" />
+    
+    <!-- Letter N -->
+    <path d="M200 0 L200 -30 L208 -30 L226 -9 L226 -30 L234 -30 L234 0 L226 0 L208 -21 L208 0 Z" />
+  </g>
+</svg>

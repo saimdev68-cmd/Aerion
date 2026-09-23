@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <defs>
+    <linearGradient id="aerion-grad-1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="60%" stop-color="#C5CBD3" />
+      <stop offset="100%" stop-color="#7B828E" />
+    </linearGradient>
+    <linearGradient id="aerion-grad-2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="40%" stop-color="#9BA2AE" />
+      <stop offset="100%" stop-color="#4B5260" />
+    </linearGradient>
+    <linearGradient id="aerion-core" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#8E95A2" stop-opacity="0.2" />
+    </linearGradient>
+  </defs>
+
+  <!-- Left Aerodynamic Strake -->
+  <path d="M50 14 L18 84 L30 84 L50 36 L70 84 L82 84 Z" fill="url(#aerion-grad-1)" />
+
+  <!-- Inner Dynamic Negative-Cut Inverted Core -->
+  <path d="M50 42 L34 80 L66 80 Z" fill="#050505" />
+
+  <!-- Floating Kinetic Apex Core (The Motion Delta) -->
+  <path d="M50 46 L40 70 L60 70 Z" fill="url(#aerion-grad-2)" />
+
+  <!-- Horizontal Stabilizer Foil -->
+  <path d="M32 64 L68 64 L65 67 L35 67 Z" fill="url(#aerion-core)" />
+</svg>
