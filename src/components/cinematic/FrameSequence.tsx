@@ -20,7 +20,6 @@ export function FrameSequence({ onHeroExplore }: FrameSequenceProps) {
       <LoadingScreen
         progress={loadingProgress}
         isReady={isReady}
-        onLoaded={onHeroExplore}
       />
 
       {/* Full-Screen Render Canvas (Pinned background) */}

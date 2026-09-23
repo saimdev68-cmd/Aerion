@@ -61,18 +61,27 @@ export function useFrameSequence() {
     let isCancelled = false;
 
     const startProgressiveLoad = async () => {
-      // PHASE 1: Immediate hero frames (1 to 20)
-      const phase1Promises: Promise<any>[] = [];
-      for (let i = 0; i < Math.min(20, FRAME_CONFIG.totalFrames); i++) {
-        phase1Promises.push(loadSingleFrame(i));
-      }
-      await Promise.all(phase1Promises);
+      // PHASE 1: Immediate hero frames (first 3 frames: 0, 1, 2)
+      // Allows the hero section to render instantly on all connection speeds
+      const heroFrames = [0, 1, 2];
+      await Promise.all(heroFrames.map((idx) => loadSingleFrame(idx)));
       if (isCancelled) return;
       setInitialBatchLoaded(true);
 
-      // PHASE 2 & 3: Background chunked loading of remaining frames (21 to 240)
-      const chunkSize = 15;
-      for (let i = 20; i < FRAME_CONFIG.totalFrames; i += chunkSize) {
+      // PHASE 2: Key landmark frames across the full 240 range
+      // Provides instantaneous visual references if the user scrolls quickly
+      const landmarks: number[] = [];
+      for (let i = 10; i < FRAME_CONFIG.totalFrames; i += 10) {
+        landmarks.push(i);
+      }
+      for (let i = 0; i < landmarks.length; i += 4) {
+        if (isCancelled) break;
+        await Promise.all(landmarks.slice(i, i + 4).map((idx) => loadSingleFrame(idx)));
+      }
+
+      // PHASE 3: Background chunked loading of all remaining frames
+      const chunkSize = 10;
+      for (let i = 3; i < FRAME_CONFIG.totalFrames; i += chunkSize) {
         if (isCancelled) break;
         const chunk: Promise<any>[] = [];
         for (let j = i; j < Math.min(i + chunkSize, FRAME_CONFIG.totalFrames); j++) {
@@ -80,7 +89,7 @@ export function useFrameSequence() {
         }
         await Promise.all(chunk);
         // Yield to main thread to ensure 60fps UI responsiveness
-        await new Promise((r) => setTimeout(r, 16));
+        await new Promise((r) => setTimeout(r, 20));
       }
     };
 

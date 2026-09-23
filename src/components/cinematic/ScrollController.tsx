@@ -6,7 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { STORY_CHAPTERS } from "@/lib/constants";
 import { FRAME_CONFIG } from "@/lib/frameSequence";
 import { FrameCanvasHandle } from "./FrameCanvas";
-import { ChevronDown, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -163,22 +163,6 @@ export function ScrollController({
               </div>
             </div>
           ))}
-
-          {/* Bottom Floating Scroll Tracker */}
-          <div className="absolute bottom-8 left-6 md:left-16 right-6 md:right-16 flex items-center justify-between text-xs font-mono text-zinc-500 border-t border-white/10 pt-4 pointer-events-none">
-            <div className="flex items-center gap-3">
-              <span className="text-zinc-300 font-semibold tracking-widest">
-                CINEMATIC SCROLL
-              </span>
-              <span className="text-zinc-600">—</span>
-              <span className="hidden sm:inline">240-FRAME APERTURE</span>
-            </div>
-
-            <div className="flex items-center gap-2 text-zinc-400">
-              <span className="animate-pulse">SCROLL TO PROGRESS</span>
-              <ChevronDown className="w-3.5 h-3.5 animate-bounce" />
-            </div>
-          </div>
         </div>
       </div>
     </div>

@@ -13,18 +13,33 @@ export function LoadingScreen({ progress, isReady, onLoaded }: LoadingScreenProp
   const [isFadingOut, setIsFadingOut] = useState(false);
   const [isRemoved, setIsRemoved] = useState(false);
 
-  // Automatically fade out once assets are ready (initial batch or complete)
+  // Automatically fade out once initial assets are ready, with unconditional safety timeout
   useEffect(() => {
-    if (isReady && progress >= 20) {
-      const timer = setTimeout(() => {
-        setIsFadingOut(true);
-        if (onLoaded) onLoaded();
-        const removeTimer = setTimeout(() => setIsRemoved(true), 800);
-        return () => clearTimeout(removeTimer);
-      }, 500);
-      return () => clearTimeout(timer);
+    let fadeTimer: NodeJS.Timeout;
+    let removeTimer: NodeJS.Timeout;
+
+    const triggerDismiss = () => {
+      setIsFadingOut(true);
+      if (onLoaded) onLoaded();
+      removeTimer = setTimeout(() => setIsRemoved(true), 700);
+    };
+
+    if (isReady) {
+      fadeTimer = setTimeout(triggerDismiss, 400);
+      return () => {
+        clearTimeout(fadeTimer);
+        clearTimeout(removeTimer);
+      };
     }
-  }, [isReady, progress, onLoaded]);
+
+    // Safety fallback: guaranteed dismissal after 2.0 seconds regardless of network quirks
+    const safetyTimer = setTimeout(triggerDismiss, 2000);
+    return () => {
+      clearTimeout(fadeTimer);
+      clearTimeout(removeTimer);
+      clearTimeout(safetyTimer);
+    };
+  }, [isReady, onLoaded]);
 
   if (isRemoved) return null;
 
