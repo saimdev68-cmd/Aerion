@@ -7,7 +7,7 @@ export function useIsMobile(breakpoint = 768) {
 
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < breakpoint || "ontouchstart" in window);
+      setIsMobile(window.innerWidth < breakpoint);
     };
 
     checkMobile();

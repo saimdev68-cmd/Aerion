@@ -24,7 +24,7 @@ export function Hero({ onExplore }: HeroProps) {
   };
 
   return (
-    <section className="relative h-screen w-full flex flex-col justify-between pt-24 pb-8 sm:pb-12 px-4 sm:px-6 md:px-16 pointer-events-none select-none z-20">
+    <section className="relative h-[100dvh] w-full flex flex-col justify-between pt-24 pb-8 sm:pb-12 px-4 sm:px-6 md:px-16 pointer-events-none select-none z-20">
       {/* Top Editorial Brand Badging */}
       <div className="max-w-3xl mt-8 sm:mt-10 md:mt-14">
         <div className="inline-flex items-center gap-2.5 px-3.5 py-1 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-4 sm:mb-6 pointer-events-auto">

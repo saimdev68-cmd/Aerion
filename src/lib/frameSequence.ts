@@ -65,12 +65,11 @@ export function calculateAspectRatioFit(
     };
   }
 
-  // "smart" mode: maintains cover on desktop/ultrawide but gently scales on narrow mobile screens
-  // so the car is never cropped aggressively on the left or right.
-  const isMobilePortrait = canvasWidth < canvasHeight && canvasWidth < 768;
-  if (isMobilePortrait) {
-    // Fill canvas but allow slight vertical centering with contain-like padding
-    let width = canvasWidth * 1.15;
+  // "smart" mode:
+  // 1. Portrait screens (mobile and tablet portrait):
+  // Fit by width so the supercar is never cut off on the sides, perfectly centered.
+  if (canvasRatio < 1.0) {
+    let width = canvasWidth;
     let height = width / imgRatio;
     return {
       width,
@@ -78,18 +77,20 @@ export function calculateAspectRatioFit(
       x: (canvasWidth - width) / 2,
       y: (canvasHeight - height) / 2,
     };
-  } else {
-    let width = canvasWidth;
-    let height = canvasWidth / imgRatio;
-    if (height < canvasHeight) {
-      height = canvasHeight;
-      width = canvasHeight * imgRatio;
-    }
-    return {
-      width,
-      height,
-      x: (canvasWidth - width) / 2,
-      y: (canvasHeight - height) / 2,
-    };
   }
+
+  // 2. Landscape screens (desktop, tablet landscape, ultrawide):
+  // Cover the viewport to deliver an immersive cinematic look without letterboxing
+  let width = canvasWidth;
+  let height = canvasWidth / imgRatio;
+  if (height < canvasHeight) {
+    height = canvasHeight;
+    width = canvasHeight * imgRatio;
+  }
+  return {
+    width,
+    height,
+    x: (canvasWidth - width) / 2,
+    y: (canvasHeight - height) / 2,
+  };
 }

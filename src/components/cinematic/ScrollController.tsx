@@ -33,7 +33,7 @@ export function ScrollController({
       trigger: triggerRef.current,
       start: "top top",
       end: "bottom bottom",
-      scrub: 0.1, // Ultra-responsive scrub
+      scrub: true, // Direct synchronized scrub with zero artificial delay
       onUpdate: (self) => {
         const progress = self.progress;
         const targetFrameIndex = Math.min(
@@ -94,14 +94,14 @@ export function ScrollController({
 
   return (
     <div ref={containerRef} className="relative w-full">
-      {/* 800vh Tall Scroll Track */}
+      {/* Responsive Tall Scroll Track: 550vh on mobile, 750vh on desktop */}
       <div
         id="cinematic-sequence"
         ref={triggerRef}
-        className="relative w-full h-[750vh]"
+        className="relative w-full h-[550vh] md:h-[750vh]"
       >
         {/* Sticky Viewport Container for Overlay Content */}
-        <div className="sticky top-0 h-screen w-full flex items-center justify-center px-6 md:px-16 pointer-events-none select-none z-10">
+        <div className="sticky top-0 h-[100dvh] w-full flex items-center justify-center px-4 sm:px-6 md:px-16 pointer-events-none select-none z-10">
           {/* Chapter Overlays */}
           {STORY_CHAPTERS.map((chapter, i) => (
             <div
@@ -109,38 +109,39 @@ export function ScrollController({
               ref={(el) => {
                 chapterRefs.current[i] = el;
               }}
-              className={`absolute inset-0 flex flex-col justify-center px-6 md:px-20 max-w-7xl mx-auto opacity-0 ${chapter.positionClass || "items-start text-left"}`}
+              style={{ willChange: "transform, opacity" }}
+              className={`absolute inset-0 flex flex-col justify-center px-4 sm:px-6 md:px-20 max-w-7xl mx-auto opacity-0 ${chapter.positionClass || "items-start text-left"}`}
             >
               <div className="max-w-xl">
                 {chapter.subtitle && (
-                  <div className="flex items-center gap-3 text-[11px] font-mono tracking-[0.3em] text-zinc-400 uppercase mb-3">
+                  <div className="flex items-center gap-2.5 sm:gap-3 text-[10px] sm:text-[11px] font-mono tracking-[0.3em] text-zinc-400 uppercase mb-2.5 sm:mb-3">
                     <span className="w-1.5 h-1.5 rounded-full bg-zinc-300 animate-pulse" />
                     <span>{chapter.subtitle}</span>
                   </div>
                 )}
 
-                <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black uppercase tracking-tight text-white font-display leading-[0.9] drop-shadow-xl">
+                <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black uppercase tracking-tight text-white font-display leading-[0.9] drop-shadow-xl">
                   {chapter.title}
                 </h2>
 
                 {chapter.description && (
-                  <p className="mt-4 text-sm md:text-base text-zinc-300 font-light leading-relaxed max-w-lg drop-shadow">
+                  <p className="mt-3 sm:mt-4 text-xs sm:text-sm md:text-base text-zinc-300 font-light leading-relaxed max-w-lg drop-shadow">
                     {chapter.description}
                   </p>
                 )}
 
                 {/* Optional Metrics Grid for Chapters with Stats */}
                 {chapter.stats && (
-                  <div className="grid grid-cols-3 gap-3 mt-6">
+                  <div className="grid grid-cols-3 gap-2 sm:gap-3 mt-4 sm:mt-6">
                     {chapter.stats.map((s, si) => (
                       <div
                         key={si}
-                        className="p-3 rounded-xl bg-black/60 border border-white/10 backdrop-blur-md"
+                        className="p-2 sm:p-3 rounded-xl bg-black/60 border border-white/10 backdrop-blur-md"
                       >
-                        <span className="text-[9px] font-mono text-zinc-500 uppercase tracking-wider block">
+                        <span className="text-[8px] sm:text-[9px] font-mono text-zinc-500 uppercase tracking-wider block">
                           {s.label}
                         </span>
-                        <span className="text-lg md:text-xl font-bold font-mono text-white">
+                        <span className="text-base sm:text-lg md:text-xl font-bold font-mono text-white">
                           {s.value}
                         </span>
                       </div>

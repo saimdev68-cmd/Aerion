@@ -103,6 +103,15 @@ export function useFrameSequence() {
   // Retrieve an image, gracefully falling back to nearest loaded frame if current frame is loading
   const getImage = useCallback((index: number): HTMLImageElement | null => {
     const clamped = Math.max(0, Math.min(FRAME_CONFIG.totalFrames - 1, index));
+
+    // On-demand prioritization: trigger immediate load for current and forward frame
+    if (!loadingStatusRef.current[clamped]) {
+      loadSingleFrame(clamped);
+      if (clamped + 1 < FRAME_CONFIG.totalFrames && !loadingStatusRef.current[clamped + 1]) {
+        loadSingleFrame(clamped + 1);
+      }
+    }
+
     const direct = imagesRef.current[clamped];
     if (direct && direct.complete && direct.naturalWidth > 0) {
       lastValidIndexRef.current = clamped;
@@ -110,7 +119,7 @@ export function useFrameSequence() {
     }
 
     // Nearest search fallback
-    for (let offset = 1; offset < 20; offset++) {
+    for (let offset = 1; offset < 30; offset++) {
       const prev = clamped - offset;
       if (prev >= 0 && imagesRef.current[prev]?.complete) {
         return imagesRef.current[prev];
@@ -123,7 +132,7 @@ export function useFrameSequence() {
 
     // Return the last successfully rendered valid frame
     return imagesRef.current[lastValidIndexRef.current];
-  }, []);
+  }, [loadSingleFrame]);
 
   const progressPercentage = Math.round((loadedCount / FRAME_CONFIG.totalFrames) * 100);
 
