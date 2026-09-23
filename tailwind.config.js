@@ -10,11 +10,11 @@ const config = {
       colors: {
         background: "#08080a",
         foreground: "#f4f4f6",
-        velocita: {
+        aerion: {
           dark: "#050507",
           panel: "rgba(18, 18, 24, 0.65)",
           border: "rgba(255, 255, 255, 0.08)",
-          accent: "#ff2a2a", // Rosso Corsa signature
+          accent: "#f4f4f6", // Metallic signature
           gold: "#e6b054",
           cyan: "#00f0ff",
           silver: "#a0a5ad",
